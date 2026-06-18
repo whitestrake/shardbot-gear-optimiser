@@ -1,0 +1,53 @@
+🎖️ Harpy
+🔧 Class
+Tinker (Ambush)
+Level
+9 (225 XP)
+Status
+Active
+Power
+Builds reality-warping musical devices.
+Background
+They act much more childish then their age should suggest.
+Profile
+Age: 22
+v1.1 Systems
+Stress: 3/100
+Trait lean: Balanced (no bias either way)
+Traits
+• Reserved — favors stealth entry in heists; main detail in protection
+• Stubborn — double weight in op trait-votes
+Bio
+Got his start in Menagerie, but after incessant complaining and a firmly rebuffed campaign to convince them to change the wallpaper in their HQ, decided it was best to part ways and find a new crew to roll with.
+Base Stats
+👊 STR 4 | ❤️ VIT 3 | ⚡ UTL 9★ | ⌚ CTR 7◆ | 🎯 TEQ 4
+Total: 27 (23 innate)
+Effective Stats (with gear/feats)
+👊 STR 8 | ❤️ VIT 9 | ⚡ UTL 9 | ⌚ CTR 8 | 🎯 TEQ 3
+Loadout
+Weapon: empty
+Costume: Mecha Suit (Cap 3)
+Gadget: empty
+Capacity: 3/4
+Feats (4)
+• Prototype — +3 UTL on round 1, then -1 UTL afterwards.
+• Overload — +3 STR but takes +1 extra damage when hit.
+• Prepper — +1 item capacity slot.
+• Underdog — +2 STR against higher-health targets.
+Unused feats (10) — rolled, not yet activated
+• Scavenger — On a winning op, chance to salvage a scrap-tier weapon from the wreckage — equipped to the squad cape with an empty slot, or stashed in the armory.
+• Improvisation — +1 UTL every other round.
+• Rebound — +2 TEQ when counterattacking.
+• Counter — +2 UTL versus a chosen class.
+• Menacing — Successful defenses drop attacker's STR by 1.
+• Lunge — Ignores up to 5 CTR differential against previously hit targets.
+• Pin — Hits reduce the victim's CTR by 2.
+• Adrenaline — +1/2 STR when below half health.
+• Ego — +2 STR at max health.
+• Positioning — +1 CTR on next 3 rounds.
+Use /feat_activate to set one.
+🔧 Research Unlocked
+Combat, Cycle, Mitigation, Ambush ← active, Artillery
+Use /tinker_research to switch.
+Image
+ID: 559 | Bench

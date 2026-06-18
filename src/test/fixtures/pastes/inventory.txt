@@ -1,0 +1,4 @@
+Inventory — All
+#2075 Homemade Costume [costume] · Cap 1 — VIT+1, UTL-1
+#2142 Taser [weapon] · Cap 0 — TEQ+1, CTR-1
+/equip <cape> <armory_id> to equip | /trash <armory_id> to delete. 3 capacity/cape across 3 slots.

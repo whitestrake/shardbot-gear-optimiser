@@ -1,0 +1,32 @@
+Arclite
+☄️ Class
+Blaster (Nuker)
+Level
+3 (19 XP)
+Status
+On operation
+Power
+Shoots hardlight arcs from another person that return after being shot.
+Background
+Their power is dangerously addictive to use.
+Profile
+Age: 23
+v1.1 Systems
+Stress: 3/100
+Trait lean: Combat -1 (pulls squad toward direct combat resolution)
+Traits
+• Aggressive — favors kidnap scout in heists; main detail in protection
+• Reserved — favors stealth entry in heists; main detail in protection
+• Stubborn — double weight in op trait-votes
+Base Stats
+STR 6★ | VIT 6 | UTL 3 | CTR 4◆ | TEQ 3
+Total: 22 (20 innate)
+Effective Stats (with gear/feats)
+STR 6 | VIT 10 | UTL 3 | CTR 4 | TEQ 3
+Loadout
+Weapon: empty
+Costume: Steel Plate (Cap 2)
+Gadget: Pipe Bomb (Cap 1)
+Capacity: 3/3
+Image
+ID: 1115 | On Roster

@@ -1,0 +1,41 @@
+Crimson
+🧠 Class
+Thinker (Strategist)
+Level
+5 (125 XP)
+Status
+Active
+Power
+Has increased access to wound infliction through local postcognition, but their power is rather vague.
+Background
+Their power is a bud off of another team member.
+Profile
+Age: 14
+v1.1 Systems
+Stress: 0/100
+Trait lean: Calm +2 (contributes to squad calm-path chance on MCS/PR ops)
+Dissonance: 24
+Traits
+• Aggressive — favors kidnap scout in heists; main detail in protection
+• Reserved — favors stealth entry in heists; main detail in protection
+• Cautious — bodyguard assignment in protection
+• Cooperative — tie-breaker in op-votes; fills empty protection roles
+Base Stats
+STR 3 | VIT 6 | UTL 5◆ | CTR 2 | TEQ 6★
+Total: 22 (18 at scout)
+Effective Stats (with gear/feats)
+STR 3 | VIT 6 | UTL 5 | CTR 2 | TEQ 7
+Loadout
+Weapon: Baseball Bat (Cap 1)
+Costume: empty
+Gadget: empty
+Capacity: 1/3
+🌐 Minor Powers (cluster echoes)
+• Tinker/Surveillance: Tinkers with modular cyborgs through hard work and discipline, but they can not build anything not within that narrowly defined spec
+• Mover/Blitz: Can move short distances via deploying their biological aerodynamic appendages while remaining still in motion
+• Blaster/Nuker: Shoots tentacles from another person that inflict ongoing damage targets
+🌐 Cluster cape (max level 5)
+• Vikki Coltun (Mover) — @superservo27
+• Dee Sparke (Blaster) — @Armourbug [|] Penumbra
+Image
+ID: 734 | Bench
