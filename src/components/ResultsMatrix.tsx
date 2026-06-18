@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import type { OptimisationRow } from '../domain/optimiser';
 import { STATS } from '../domain/stats';
 import type { CatalogItem } from '../domain/types';
+import { Tooltip } from './Tooltip';
 
 interface ResultsMatrixProps {
   rows: OptimisationRow[];
@@ -96,48 +97,81 @@ export function ResultsMatrix({ rows, selectedRowKey, onSelect, displayLimit = 1
                     ))}
                   </div>
                   <div className="build-card-items-grid">
-                    <div
-                      className="build-card-grid-cell"
-                      title={weapon ? `${weapon.name}${formatItemEffects(weapon)}` : undefined}
-                    >
-                      {weapon ? (
-                        <>
-                          <span className="build-card-item-name">{weapon.name}</span>
-                          <span className="build-card-item-effects">{formatItemEffects(weapon)}</span>
-                        </>
-                      ) : (
-                        <span className="build-card-item-empty">No Weapon</span>
-                      )}
+                    <div className="build-card-grid-cell">
+                      <Tooltip
+                        content={weapon ? `${weapon.name}${formatItemEffects(weapon)}` : 'No Weapon'}
+                        showOnOverflowOnly
+                        overflowSelector=".build-card-item-name, .build-card-item-effects, .build-card-item-empty"
+                        triggerClassName="build-card-cell-content-wrapper build-card-tooltip-trigger"
+                      >
+                        <div className="build-card-cell-text">
+                          {weapon ? (
+                            <>
+                              <span className="build-card-item-name">{weapon.name}</span>
+                              {formatItemEffects(weapon) && (
+                                <span className="build-card-item-effects">{formatItemEffects(weapon).trim()}</span>
+                              )}
+                            </>
+                          ) : (
+                            <span className="build-card-item-empty">No Weapon</span>
+                          )}
+                        </div>
+                      </Tooltip>
                     </div>
-                    <div
-                      className="build-card-grid-cell"
-                      title={costume ? `${costume.name}${formatItemEffects(costume)}` : undefined}
-                    >
-                      {costume ? (
-                        <>
-                          <span className="build-card-item-name">{costume.name}</span>
-                          <span className="build-card-item-effects">{formatItemEffects(costume)}</span>
-                        </>
-                      ) : (
-                        <span className="build-card-item-empty">No Costume</span>
-                      )}
+                    <div className="build-card-grid-cell">
+                      <Tooltip
+                        content={costume ? `${costume.name}${formatItemEffects(costume)}` : 'No Costume'}
+                        showOnOverflowOnly
+                        overflowSelector=".build-card-item-name, .build-card-item-effects, .build-card-item-empty"
+                        triggerClassName="build-card-cell-content-wrapper build-card-tooltip-trigger"
+                      >
+                        <div className="build-card-cell-text">
+                          {costume ? (
+                            <>
+                              <span className="build-card-item-name">{costume.name}</span>
+                              {formatItemEffects(costume) && (
+                                <span className="build-card-item-effects">{formatItemEffects(costume).trim()}</span>
+                              )}
+                            </>
+                          ) : (
+                            <span className="build-card-item-empty">No Costume</span>
+                          )}
+                        </div>
+                      </Tooltip>
                     </div>
-                    <div
-                      className="build-card-grid-cell"
-                      title={gadget ? `${gadget.name}${formatItemEffects(gadget)}` : undefined}
-                    >
-                      {gadget ? (
-                        <>
-                          <span className="build-card-item-name">{gadget.name}</span>
-                          <span className="build-card-item-effects">{formatItemEffects(gadget)}</span>
-                        </>
-                      ) : (
-                        <span className="build-card-item-empty">No Gadget</span>
-                      )}
+                    <div className="build-card-grid-cell">
+                      <Tooltip
+                        content={gadget ? `${gadget.name}${formatItemEffects(gadget)}` : 'No Gadget'}
+                        preferredPlacement="bottom"
+                        showOnOverflowOnly
+                        overflowSelector=".build-card-item-name, .build-card-item-effects, .build-card-item-empty"
+                        triggerClassName="build-card-cell-content-wrapper build-card-tooltip-trigger"
+                      >
+                        <div className="build-card-cell-text">
+                          {gadget ? (
+                            <>
+                              <span className="build-card-item-name">{gadget.name}</span>
+                              {formatItemEffects(gadget) && (
+                                <span className="build-card-item-effects">{formatItemEffects(gadget).trim()}</span>
+                              )}
+                            </>
+                          ) : (
+                            <span className="build-card-item-empty">No Gadget</span>
+                          )}
+                        </div>
+                      </Tooltip>
                     </div>
-                    <div className="build-card-grid-cell capacity-cell" title={`Capacity used: ${row.capacityUsed}`}>
-                      <span className="build-card-slot-label">Capacity:</span>{' '}
-                      <strong className="build-card-capacity-value">{row.capacityUsed}</strong>
+                    <div className="build-card-grid-cell capacity-cell">
+                      <Tooltip
+                        content={`Weapon: ${weapon?.capacity ?? 0} | Costume: ${costume?.capacity ?? 0} | Gadget: ${gadget?.capacity ?? 0}`}
+                        preferredPlacement="bottom"
+                        triggerClassName="build-card-cell-content-wrapper build-card-tooltip-trigger"
+                      >
+                        <div className="build-card-cell-text">
+                          <span className="build-card-slot-label">Capacity:</span>{' '}
+                          <strong className="build-card-capacity-value">{row.capacityUsed}</strong>
+                        </div>
+                      </Tooltip>
                     </div>
                   </div>
                 </div>

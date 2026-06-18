@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { Tooltip } from './Tooltip';
 
 interface FeasibilityBarProps {
   defaultMin: number;
@@ -147,28 +148,27 @@ export function FeasibilityBar({
         className="feasibility-range"
         style={{ left: `${feasibleLeft}%`, width: `${feasibleWidth}%` }}
       />
-      <div
-        className="feasibility-chevron-wrapper feasibility-base-wrapper"
-        style={{ left: `${baseLeft}%` }}
+      <Tooltip
+        content={`Base ${baseValue}`}
+        offset={-8}
+        triggerClassName="feasibility-chevron-wrapper feasibility-base-wrapper feasibility-chevron-hit-target"
+        triggerStyle={{ left: `${baseLeft}%` }}
       >
         <div className="feasibility-base-chevron" />
-        <div className="feasibility-tooltip">
-          Base {baseValue}
-        </div>
-      </div>
+      </Tooltip>
       {selectedValue !== null && selectedLeft !== null && (
-        <div
-          className="feasibility-chevron-wrapper feasibility-selected-wrapper"
-          style={{ left: `${selectedLeft}%` }}
+        <Tooltip
+          content={`Geared ${selectedValue} (${selectedValue - baseValue >= 0 ? '+' : ''}${selectedValue - baseValue})`}
+          offset={-8}
+          preferredPlacement="bottom"
+          triggerClassName="feasibility-chevron-wrapper feasibility-selected-wrapper feasibility-chevron-hit-target"
+          triggerStyle={{ left: `${selectedLeft}%` }}
         >
           <div
             className="feasibility-selected-chevron"
             style={{ borderBottomColor: gearedChevronColor }}
           />
-          <div className="feasibility-tooltip">
-            Geared {selectedValue} ({selectedValue - baseValue >= 0 ? '+' : ''}{selectedValue - baseValue})
-          </div>
-        </div>
+        </Tooltip>
       )}
       <div
         className="feasibility-constraint-brace feasibility-constraint-min"

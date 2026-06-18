@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { useEffect, useRef, type ReactNode } from 'react';
 
 interface ModalProps {
@@ -29,7 +30,7 @@ export function Modal({ title, titleId, children, onClose }: ModalProps) {
     };
   }, [onClose]);
 
-  return (
+  return createPortal(
     <div className="modal-backdrop" role="presentation" onClick={onClose}>
       <div
         className="modal"
@@ -46,6 +47,7 @@ export function Modal({ title, titleId, children, onClose }: ModalProps) {
         </div>
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
