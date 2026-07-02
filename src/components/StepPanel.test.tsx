@@ -1,8 +1,11 @@
 import '@testing-library/jest-dom/vitest';
 import { render, screen } from '@testing-library/react';
+import fs from 'node:fs';
 import { describe, expect, it } from 'vitest';
 
 import { StepPanel } from './StepPanel';
+
+const styles = fs.readFileSync('src/styles.css', 'utf8');
 
 describe('StepPanel', () => {
   it('renders a stable pane shell with explicit pane state', () => {
@@ -78,5 +81,16 @@ describe('StepPanel', () => {
 
     expect(screen.getByText('Step description here')).toBeInTheDocument();
     expect(screen.getByText('Step description here')).toHaveClass('step-panel-description');
+  });
+
+  it('keeps the expanded output pane clipped while accordion columns animate', () => {
+    const overflowVisibleRules = Array.from(
+      styles.matchAll(/([^{}]+)\{[^{}]*overflow:\s*visible;[^{}]*\}/g),
+      ([, selectors]) => selectors,
+    ).join('\n');
+
+    expect(overflowVisibleRules).not.toMatch(
+      /\.step-panel\[data-pane="output"\]:not\(\[data-collapsed="true"\]\)/,
+    );
   });
 });

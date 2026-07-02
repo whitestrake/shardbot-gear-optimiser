@@ -522,9 +522,7 @@ textarea {
 }
 
 .step-panel[data-pane="goals"],
-.step-panel[data-pane="goals"] .step-panel-expanded-content,
-.step-panel[data-pane="output"]:not([data-collapsed="true"]),
-.step-panel[data-pane="output"]:not([data-collapsed="true"]) .step-panel-expanded-content {
+.step-panel[data-pane="goals"] .step-panel-expanded-content {
   overflow: visible;
 }
 
