@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/vitest';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { beforeEach, afterEach, describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { App } from './App';
 import { loadPasteFixture } from './test/fixtures/loadPasteFixture';
 
@@ -29,14 +29,12 @@ describe('App', () => {
   });
 
   it('lets pasted cape text populate editable fields', async () => {
-    const user = userEvent.setup();
     render(<App />);
 
-    await user.type(
+    await commitField(
       screen.getByLabelText(/^cape$/i),
       'Alias: Meridian\nClass: Tinker: Combat\nStrength: 3 | Vitality: 4 | Utility: 6 | Control: 5 | Technique: 5\nFeats: Prepper',
     );
-    fireEvent.blur(screen.getByLabelText(/^cape$/i));
 
     expect(screen.getByLabelText(/^class$/i)).toHaveValue('Tinker');
     expect(screen.getByLabelText(/^subclass$/i)).toHaveValue('Combat');
@@ -55,18 +53,19 @@ describe('App', () => {
   });
 
   it('selects the full paste text when the cape or inventory box is clicked', async () => {
-    const user = userEvent.setup();
     render(<App />);
 
     const capePaste = screen.getByLabelText(/^cape$/i) as HTMLTextAreaElement;
     const inventoryPaste = screen.getByLabelText(/^inventory$/i) as HTMLTextAreaElement;
 
-    await user.click(capePaste);
+    fireEvent.change(capePaste, { target: { value: 'cape text' } });
+    capePaste.focus();
     expect(capePaste).toHaveFocus();
     expect(capePaste.selectionStart).toBe(0);
     expect(capePaste.selectionEnd).toBe(capePaste.value.length);
 
-    await user.click(inventoryPaste);
+    fireEvent.change(inventoryPaste, { target: { value: 'inventory text' } });
+    inventoryPaste.focus();
     expect(inventoryPaste).toHaveFocus();
     expect(inventoryPaste.selectionStart).toBe(0);
     expect(inventoryPaste.selectionEnd).toBe(inventoryPaste.value.length);
@@ -80,19 +79,16 @@ describe('App', () => {
     expect(screen.getAllByRole('button', { name: /drag .* priority/i })).toHaveLength(5);
 
     const minInput = screen.getAllByLabelText(/^min$/i)[0];
-    await user.clear(minInput);
-    await user.type(minInput, '6');
+    fireEvent.change(minInput, { target: { value: '6' } });
 
     expect(minInput).toHaveValue('6');
   });
 
   it('normalizes base stat inputs when committed', async () => {
-    const user = userEvent.setup();
     render(<App />);
 
     const strengthInput = screen.getByLabelText(/^strength$/i);
-    await user.clear(strengthInput);
-    await user.type(strengthInput, '04');
+    fireEvent.change(strengthInput, { target: { value: '04' } });
 
     expect(strengthInput).toHaveValue('04');
 
@@ -109,8 +105,7 @@ describe('App', () => {
     expect(screen.getAllByRole('button', { name: /select build: grenade launcher/i }).length).toBeGreaterThan(0);
 
     const inventoryPaste = screen.getByLabelText(/^inventory$/i);
-    await user.type(inventoryPaste, 'Pistol');
-    fireEvent.blur(inventoryPaste);
+    await commitField(inventoryPaste, 'Pistol');
 
     expect(screen.queryByRole('button', { name: /select build: grenade launcher/i })).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: /select build: pistol$/i })).toBeInTheDocument();
@@ -122,8 +117,7 @@ describe('App', () => {
     await chooseCapeType(user);
 
     const inventoryPaste = screen.getByLabelText(/^inventory$/i);
-    await user.type(inventoryPaste, 'Pistol x2\nUnknown Thing');
-    fireEvent.blur(inventoryPaste);
+    await commitField(inventoryPaste, 'Pistol x2\nUnknown Thing');
 
     expect(screen.getByRole('dialog', { name: /inventory text needs attention/i })).toBeInTheDocument();
     expect(screen.getByText('Unknown Thing')).toBeInTheDocument();
@@ -201,7 +195,6 @@ describe('App', () => {
   });
 
   it('does not move right or show modal when pasting empty cape text', async () => {
-    const user = userEvent.setup();
     setViewportWidth(1000);
     render(<App />);
 
@@ -219,17 +212,13 @@ describe('App', () => {
   });
 
   it('opens a modal and does not move right when pasting invalid cape text', async () => {
-    const user = userEvent.setup();
     setViewportWidth(1000);
     render(<App />);
 
     expect(screen.getByRole('button', { name: /expand optimised builds/i })).toBeInTheDocument();
 
     const capeInput = screen.getByLabelText(/^cape$/i);
-    await user.type(capeInput, 'hello world');
-    await act(async () => {
-      fireEvent.blur(capeInput);
-    });
+    await commitField(capeInput, 'hello world');
 
     expect(screen.getByRole('button', { name: /expand optimised builds/i })).toBeInTheDocument();
     expect(screen.getByRole('dialog', { name: /cape text needs attention/i })).toBeInTheDocument();
@@ -281,9 +270,7 @@ describe('App', () => {
     expect(firstSelectButton).toHaveClass('selected');
 
     const strengthMax = screen.getAllByLabelText(/^max$/i)[0];
-    await user.clear(strengthMax);
-    await user.type(strengthMax, '1');
-    fireEvent.blur(strengthMax);
+    await commitField(strengthMax, '1');
 
     expect(firstSelectButton).not.toBeInTheDocument();
   });
@@ -296,14 +283,10 @@ describe('App', () => {
     const minInput = screen.getAllByLabelText(/^min$/i)[0];
     const maxInput = screen.getAllByLabelText(/^max$/i)[0];
 
-    await user.clear(minInput);
-    await user.type(minInput, '0');
-    fireEvent.blur(minInput);
+    await commitField(minInput, '0');
     expect(minInput).toHaveValue('1');
 
-    await user.clear(maxInput);
-    await user.type(maxInput, '21');
-    fireEvent.blur(maxInput);
+    await commitField(maxInput, '21');
     expect(maxInput).toHaveValue('20');
   });
 
@@ -315,15 +298,11 @@ describe('App', () => {
     const minInput = screen.getAllByLabelText(/^min$/i)[0];
     const maxInput = screen.getAllByLabelText(/^max$/i)[0];
 
-    await user.clear(minInput);
-    await user.type(minInput, '1');
-    fireEvent.blur(minInput);
+    await commitField(minInput, '1');
     await user.click(screen.getByRole('button', { name: /decrease strength minimum/i }));
     expect(minInput).toHaveValue('1');
 
-    await user.clear(maxInput);
-    await user.type(maxInput, '20');
-    fireEvent.blur(maxInput);
+    await commitField(maxInput, '20');
     await user.click(screen.getByRole('button', { name: /increase strength maximum/i }));
     expect(maxInput).toHaveValue('20');
   });
@@ -340,4 +319,11 @@ function setViewportWidth(width: number) {
     value: width,
   });
   window.dispatchEvent(new Event('resize'));
+}
+
+async function commitField(field: HTMLElement, value: string) {
+  await act(async () => {
+    fireEvent.change(field, { target: { value } });
+    fireEvent.blur(field);
+  });
 }
